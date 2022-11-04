@@ -5,7 +5,7 @@ int button = 2;
 
 void setup() {
   
-  pinMode(button,OUTPUT);
+  pinMode(button,INPUT);
   pinMode(led_greeen,OUTPUT);
 }
 
@@ -22,7 +22,7 @@ void loop() {
     delay(250);
     digitalWrite(led_yellow,HIGH);
     digitalWrite(led_greeen,LOW); 
-    delay(250);
+    delay(250);  
     
     }
 }
