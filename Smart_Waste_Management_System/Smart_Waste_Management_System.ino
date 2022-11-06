@@ -2,7 +2,7 @@
 #include <ESP8266HTTPClient.h>
 
 WiFiClient client;  
-String request;
+String request_string;
 HTTPClient http;
 
 const int trigPin = D6;
@@ -10,7 +10,7 @@ const int echoPin = D5;
 
 long duration;
 int distance;
-
+String thingsSpeakAddresss = "http://api.thingspeak.com/apps/thinghttp/send_request?";
 void setup() {
   pinMode(trigPin,OUTPUT);
   pinMode(echoPin,INPUT);   
@@ -42,18 +42,26 @@ void loop() {
   delay(100);
 
   if(client.connect("api.thingspeak.com",80)){
-    request = "http://api.thingspeak.com/apps/thinghttp/send_request?api_key=2T9K1JBYFQ4PSFH7&distance=";
-    request += "Dustbin is full";
+    request_string = thingsSpeakAddresss;
+    request_string += "api_key=";
+    request_string += "2T9K1JBYFQ4PSFH7";
+    request_string += "&";
+    request_string += "distance=";
+    request_string += "Dustbin is full";
     if(distance <= 10)
     {
-      http.begin(client , request);
+      http.begin(client ,request_string);
       http.GET();
       http.end();
       Serial.println("Request sent!");
-      Serial.println(request);
+      Serial.println(request_string);
       
       }
       delay(100);
     }
+    
+
+
+
 
 } 
